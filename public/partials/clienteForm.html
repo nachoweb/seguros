@@ -1,0 +1,73 @@
+<div class="row-fluid"><div class="span2 offset4"><h4 style="display: inline-block;">Datos de Cliente</h4></div>
+<button class="btn btn-primary" ng-click="crearCliente(cliente)" ng-show="nuevo==1" ng-disabled="formulario.$invalid"><i class="icon-white icon-plus"></i> Crear el cliente</button>
+</div>
+<div class="row-fluid">
+    <div class="span6">
+        <form name="formulario" class="form-horizontal">
+            <div class="control-group"><label for="nombre" class="control-label">Nombre</label><div class="controls">
+                <input type="text" id="nombre" placeholder="Nombre" ng-model="cliente.nombre" required>
+            </div> </div>
+            <div class="control-group"><label for="apellidos" class="control-label">Apellidos</label><div class="controls">
+                <input type="text" id="apellidos" placeholder="Apellidos" ng-model="cliente.apellidos">
+            </div> </div>
+            <div class="control-group"><label for="dni" class="control-label">DNI</label><div class="controls">
+                <input type="text" id="dni" placeholder="DNI" ng-model="cliente.dni">
+            </div> </div>
+        </form>
+    </div>
+    <div class="span6">
+        <form class="form-horizontal" name="formu2">
+            <div class="control-group"><label for="tlf" class="control-label">Teléfono</label><div class="controls">
+                <input type="text" id="tlf" placeholder="Teléfono" ng-model="cliente.telefono">
+            </div> </div>
+            <div class="control-group"><label for="em" class="control-label">Email</label><div class="controls">
+                <input type="text" id="email" name="em" placeholder="Email" ng-model="cliente.email">
+            </div> </div>
+            <div class="control-group"><label for="profesion" class="control-label">Profesión</label><div class="controls">
+                <input type="text" id="profesion" placeholder="Profesión" ng-model="cliente.profesion">
+            </div> </div>
+        </form>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span10 offset1">
+        <textarea name="observaciones" placeholder="Observaciones" ng-model="cliente.observaciones" rows="10" style="width:100%;"></textarea>
+    </div>
+</div>
+<hr>
+<div class="row-fluid"><div class="span4 offset4"><h4 style="display: inline-block;">Datos de productos contratados</h4></div></div>
+<!--Lista de productos del cliente-->
+<form class="form-inline" ng-repeat="prod in cliente.productos">
+    <select class="input-medium" placeholder="Producto" ng-model="prod.productoElegido" ng-options="p.nombre group by p.tipo for p in listaProductos">
+        <option value="">--- Producto ---</option>
+    </select>
+    <input type="text" class="input-medium" placeholder="Complementarios" ng-model="prod.comp">
+    <div class="input-append">
+        <input type="text" class="input-small" b-datepicker="{{dateFormat}}" placeholder="Fecha Inicio" ng-model="prod.fecha">
+        <span class="add-on"><i class="icon-calendar"></i></span>
+    </div>
+    <input type="text" class="input-small" placeholder="Importe" ng-model="prod.importe">
+    <div class="input-append">
+        <input type="text" class="input-small" b-datepicker="{{dateFormat}}" placeholder="Vencimiento" ng-model="prod.vencimiento">
+        <span class="add-on"><i class="icon-calendar"></i></span>
+    </div>
+    <button class="btn btn-danger" ng-click="removeProducto(prod,cliente)"><i class="icon-remove icon-white"></i> Borrar</button>
+</form>
+
+<!--Producto en blanco-->
+<form class="form-inline">
+    <select class="input-medium" placeholder="Producto" ng-model="prodNuevo.productoElegido" ng-options="p.nombre group by p.tipo for p in listaProductos">
+        <option value="">--- Producto ---</option>
+    </select>
+    <input type="text" class="input-medium" placeholder="Complementarios" ng-model="prodNuevo.comp">
+    <div class="input-append">
+        <input type="text" class="input-small" b-datepicker="{{dateFormat}}" placeholder="Fecha Inicio" ng-model="prodNuevo.fecha">
+        <span class="add-on"><i class="icon-calendar"></i></span>
+    </div>
+    <input type="text" class="input-small" placeholder="Importe" ng-model="prodNuevo.importe">
+    <div class="input-append">
+        <input type="text" class="input-small" b-datepicker="{{dateFormat}}" placeholder="Vencimiento" ng-model="prodNuevo.vencimiento">
+        <span class="add-on"><i class="icon-calendar"></i></span>
+    </div>
+</form>
+<button class="btn btn-primary" style="margin-left: 5px" ng-click="addProducto(prodNuevo)"><i class="icon-plus icon-white"></i> Nuevo producto</button>

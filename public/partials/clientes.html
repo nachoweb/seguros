@@ -1,0 +1,21 @@
+<div class="span2" id="sidebar">
+    <!--side bar content-->
+    <h2>Seguros Miriam</h2>
+    <a ng-href="#/clientes/nuevo"><button class="btn btn-primary"><i class="icon-plus icon-white"></i> Nuevo cliente</button></a><br>
+    <button class="btn btn-danger" ng-hide="sinCambios()" ng-click="actualizaServer()" style="margin-top: 5px;"><i class="icon-upload icon-white"></i> Guarda Datos</button>
+
+    <hr>
+    <form class="form-search">
+        <input type="text" placeholder="Buscar..." class="input-small search-query" ng-model="search.apellidos">
+    </form>
+    <ul>
+        <li ng-repeat="cli in clientes | filter:search"><a ng-href="#/clientes/{{$index}}">{{cli.nombre}}
+            {{cli.apellidos}}</a></li>
+    </ul>
+
+</div>
+<div class="span10" id="contentbar">
+    <!--body content-->
+    <div ng-include src="templateUrl"></div>
+</div>
+
